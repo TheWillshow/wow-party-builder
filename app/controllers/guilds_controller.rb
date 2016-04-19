@@ -1,5 +1,6 @@
 class GuildsController < ApplicationController
   def index
+
   end
 
   def create
@@ -29,7 +30,10 @@ class GuildsController < ApplicationController
 
     @guild_info = RBattlenet::Wow::Guild.find(name: params['name'],
                                 realm: "illidan",
-                                fields: ["members", "news"])
+                                fields: ["members", "name", "class", "level", "spec"])
+  end
 
+  def guild_params
+    params.require(:guild).permit(:guild_name, :realm)
   end
 end
