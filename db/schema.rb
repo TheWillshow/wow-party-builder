@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 20160419191521) do
   enable_extension "plpgsql"
 
   create_table "guildmembers", force: :cascade do |t|
-    t.string   "member_name",     null: false
-    t.integer  "character_class", null: false
-    t.integer  "level",           null: false
-    t.string   "spec"
+    t.string   "member_name",                  null: false
+    t.integer  "character_class",              null: false
+    t.integer  "level",                        null: false
+    t.string   "spec",            default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "guild_id"

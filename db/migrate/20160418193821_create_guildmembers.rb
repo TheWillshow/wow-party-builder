@@ -4,7 +4,7 @@ class CreateGuildmembers < ActiveRecord::Migration
       t.string :member_name, null: false
       t.integer :class, null: false
       t.integer :level, null: false
-      t.string :spec
+      t.string :spec, default: ''
 
       t.timestamps
     end
