@@ -33,6 +33,7 @@ group :test do
   gem 'capybara-rails'
   gem 'launchy'
   gem 'factory_girl_rails', :require => false
+  gem 'coveralls', require: false
   gem 'database_cleaner'
 end
 
