@@ -1,0 +1,17 @@
+<% if current_user %>
+  <%= form_for @guild do |f| %>
+    <div class="field">
+      <%= f.label :name, 'Guildname' %><br />
+      <%= f.text_field :guild_name, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :Realm, 'Realm' %><br />
+      <%= f.select :realm, @realm_list%>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit" %>
+    </div>
+  <% end %>
+<% end %>
