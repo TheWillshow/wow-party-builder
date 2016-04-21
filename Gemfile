@@ -22,6 +22,8 @@ gem 'rbattlenet'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'pry'
+gem 'omniauth-oauth2', "1.3.1"
+gem 'omniauth-bnet', "1.1.0"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
