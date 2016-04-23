@@ -1,3 +1,4 @@
 <h1>Hi</h1>
-
-<%= render "guilds/guild_form", locals: {us_server_list: @us_realm_list} %>
+<% if session[:user_id] %>
+  <%= render "guilds/guild_form", locals: {us_server_list: @us_realm_list} %>
+<% end %>

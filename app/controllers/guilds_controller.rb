@@ -25,7 +25,7 @@ class GuildsController < ApplicationController
   private
 
   def retrieve_guild_info
-    RBattlenet.authenticate(api_key: ENV['BNET_API'])
+    RBattlenet.authenticate(api_key: ENV['BNET_KEY'])
     RBattlenet.set_region(region: "us", locale: "en_US")
 
     @guild_info = RBattlenet::Wow::Guild.find(name: "#{@guild_name}",
