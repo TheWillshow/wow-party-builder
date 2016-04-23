@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419191521) do
+ActiveRecord::Schema.define(version: 20160423171519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,17 @@ ActiveRecord::Schema.define(version: 20160419191521) do
     t.datetime "updated_at"
   end
 
+  create_table "parties", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "partymembers", force: :cascade do |t|
+    t.integer "party_id"
+    t.integer "guildmember_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "uid",                 default: "", null: false
     t.string   "battletag",           default: "", null: false
@@ -49,4 +60,6 @@ ActiveRecord::Schema.define(version: 20160419191521) do
   add_index "users", ["uid"], name: "index_users_on_uid", unique: true, using: :btree
 
   add_foreign_key "guildmembers", "guilds"
+  add_foreign_key "partymembers", "guildmembers"
+  add_foreign_key "partymembers", "parties"
 end

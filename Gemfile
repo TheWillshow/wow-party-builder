@@ -25,8 +25,7 @@ gem 'pry'
 gem 'foundation-rails'
 gem 'omniauth-oauth2', "1.3.1"
 gem 'omniauth-bnet', "1.1.0"
-gem 'vcr'
-gem 'webmock'
+
 
 group :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -37,6 +36,8 @@ group :test do
   gem 'factory_girl_rails', :require => false
   gem 'coveralls', require: false
   gem 'database_cleaner'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do
