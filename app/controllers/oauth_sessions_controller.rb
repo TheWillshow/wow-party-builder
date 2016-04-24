@@ -17,7 +17,7 @@ class OauthSessionsController < ApplicationController
     else
       @user = User.find_by uid: "#{@uid}"
     end
-    binding.pry
+
     redirect_to root_path
   end
 

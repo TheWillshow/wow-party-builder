@@ -25,6 +25,7 @@ gem 'pry'
 gem 'foundation-rails'
 gem 'omniauth-oauth2', "1.3.1"
 gem 'omniauth-bnet', "1.1.0"
+gem 'pg_search'
 
 
 group :test do

@@ -1,4 +1,10 @@
-<h1>Hi</h1>
-<% if session[:user_id] %>
-  <%= render "guilds/guild_form", locals: {us_server_list: @us_realm_list} %>
-<% end %>
+<h1>WoW Party Builder</h1>
+<ul>
+  <% @pg_search_models.each do |pg_search| %>
+    <% if pg_search.searchable.respond_to?(:name) %>
+    <li>  <%= pg_search.searchable.name %></li>
+    <% else %>
+      <li><%= pg_search.searchable.guild_name %></li>
+    <% end %>
+  <% end %>
+</ul>

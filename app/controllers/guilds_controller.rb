@@ -1,20 +1,16 @@
 class GuildsController < ApplicationController
   def create
     @guild = Guild.new(guild_params)
-    if @guild.save
-      flash[:notice] = "Guild has been imported"
-      root_path
-    elsif Guild.exists?
-      flash[:alert] = "Guild already in Database"
-    else
-      @guild = Guild.find_by guild_name: "#{@guild_name}"
-    end
 
     @guild_name = @guild.guild_name
     @realm = @guild.realm
 
     retrieve_guild_info
-    parse_guild
+    if @guild_name == nil
+      root_path
+    else
+      parse_guild
+    end
     redirect_to root_path
   end
 
@@ -31,6 +27,22 @@ class GuildsController < ApplicationController
     @guild_info = RBattlenet::Wow::Guild.find(name: "#{@guild_name}",
                                 realm: "#{@realm}",
                                 fields: ["members"])
+                                binding.pry
+
+    @guild.guild_name = @guild_info['name']
+    @guild_name = @guild_info['name']
+    if @guild_info['reason'] == "Guild not found."
+      @guild_name = nil
+      flash[:alert] = "Guild not found"
+      root_path
+    elsif Guild.exists?
+      flash[:alert] = "Guild already in Database"
+      @guild = Guild.find_by guild_name: "#{@guild_name}"
+    else
+      @guild = Guild.new(guild_name:"#{@guild_name}", realm:"#{@realm}")
+      @guild.save
+      flash[:notice] = "Guild has been imported"
+    end
   end
 
   def create_guild
@@ -46,26 +58,34 @@ class GuildsController < ApplicationController
   end
 
   def parse_guild
-    create_guild
     i = 0
-    @guild_info["members"].each do |member|
-      @member_name = @guild_info['members'][i]['character']['name']
-      @level = @guild_info['members'][i]['character']['level']
-      @class = @guild_info['members'][i]['character']['class']
-      @spec = @guild_info['members'][i]['character']['spec']
-      if @spec == nil
-        @spec = ""
-      else
-        @spec = @guild_info['members'][i]['character']['spec']['name']
+    @guild = Guild.new(guild_name:"#{@guild_name}", realm:"#{@realm}")
+    @guild.save
+
+    if @guild_info['reason'] == "Guild not found."
+      @guild_name = nil
+      flash[:alert] = "Guild not found"
+      root_path
+    else
+      @guild_info["members"].each do |member|
+        @member_name = @guild_info['members'][i]['character']['name']
+        @level = @guild_info['members'][i]['character']['level']
+        @class = @guild_info['members'][i]['character']['class']
+        @spec = @guild_info['members'][i]['character']['spec']
+        if @spec == nil
+          @spec = ""
+        else
+          @spec = @guild_info['members'][i]['character']['spec']['name']
+        end
+        
+        @guildmember = Guildmember.new(member_name:"#{@member_name}", guild_id:"#{@guild.id}",
+        level:"#{@level}", character_class:"#{@class}", spec:"#{@spec}")
+        @guildmember.save
+        i += 1
       end
-
-
-      @guildmember = Guildmember.new(member_name:"#{@member_name}", guild_id:"#{@guild.id}",
-      level:"#{@level}", character_class:"#{@class}", spec:"#{@spec}")
-      @guildmember.save
-      i += 1
     end
   end
+
   def guild_params
     params.require(:guild).permit(:guild_name.downcase, :realm.downcase)
   end

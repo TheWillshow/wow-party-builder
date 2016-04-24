@@ -13,10 +13,18 @@
 
   <body>
     <header>
-      <%= render "layouts/navbar" %>
-      <%= render "layouts/flash" %>
+      <div class="row ">
+        <%= render "layouts/navbar" %>
+        <%= render "layouts/flash" %>
+        <div>
+          <% if session[:user_id] %>
+            <%= render "guilds/guild_form", locals: {us_server_list: @us_realm_list} %>
+          <% end %>
+        </div>
+        <%= render "homepages/search" %>
+        <div>
     </header>
-    
+
     <%= yield %>
 
   </body>
