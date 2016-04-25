@@ -1,10 +1,12 @@
 class GuildsController < ApplicationController
   def create
     @guild = Guild.new(guild_params)
-
-    @guild_name = @guild.guild_name
-    @realm = @guild.realm
-
+    if @guild_name.nil?
+      flash[:alert] = "Guild not found"
+    else
+      @guild_name = @guild.guild_name
+      @realm = @guild.realm
+    end
     retrieve_guild_info
     if @guild_name == nil
       root_path
@@ -18,6 +20,12 @@ class GuildsController < ApplicationController
     @guild = Guild.new
   end
 
+  def show
+    @guild = Guild.find(params[:id])
+    @guildmembers = @guild.guildmembers
+    @realm_list = Realms::US_REALM_LIST
+  end
+
   private
 
   def retrieve_guild_info
@@ -27,17 +35,19 @@ class GuildsController < ApplicationController
     @guild_info = RBattlenet::Wow::Guild.find(name: "#{@guild_name}",
                                 realm: "#{@realm}",
                                 fields: ["members"])
-                                binding.pry
 
     @guild.guild_name = @guild_info['name']
     @guild_name = @guild_info['name']
+
     if @guild_info['reason'] == "Guild not found."
       @guild_name = nil
       flash[:alert] = "Guild not found"
-      root_path
-    elsif Guild.exists?
+    elsif Guild.exists?(guild_name:'@guild_name')
       flash[:alert] = "Guild already in Database"
       @guild = Guild.find_by guild_name: "#{@guild_name}"
+    elsif @guild.id.nil?
+      binding.pry
+      flash[:alert] = "Guild not found"
     else
       @guild = Guild.new(guild_name:"#{@guild_name}", realm:"#{@realm}")
       @guild.save
@@ -45,23 +55,9 @@ class GuildsController < ApplicationController
     end
   end
 
-  def create_guild
-    @guild_name = @guild_info['name']
-    @realm = @guild_info['realm']
-    @guild = Guild.new(guild_name:"#{@guild_name}", realm:"#{@realm}")
-    if @guild.save
-      root_path
-    else
-      @guild = Guild.find_by guild_name: "#{@guild_name}"
-    end
-
-  end
-
   def parse_guild
+    @guild = Guild.find_by guild_name: "#{@guild_name}"
     i = 0
-    @guild = Guild.new(guild_name:"#{@guild_name}", realm:"#{@realm}")
-    @guild.save
-
     if @guild_info['reason'] == "Guild not found."
       @guild_name = nil
       flash[:alert] = "Guild not found"
@@ -77,7 +73,6 @@ class GuildsController < ApplicationController
         else
           @spec = @guild_info['members'][i]['character']['spec']['name']
         end
-        
         @guildmember = Guildmember.new(member_name:"#{@member_name}", guild_id:"#{@guild.id}",
         level:"#{@level}", character_class:"#{@class}", spec:"#{@spec}")
         @guildmember.save

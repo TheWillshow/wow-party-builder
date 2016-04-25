@@ -1,5 +1,14 @@
-<% if session[:user_id] %>
-    <li><%= link_to "Log out", '/logout', method: :delete %></li>
-<% else %>
-    <li><%= link_to "Sign In", login_path %></li>
-<% end %>
+<ul class="right">
+  <% if session[:user_id] %>
+      <li class="button radius log"><%= link_to "Log out", '/logout', method: :delete %></li>
+  <% else %>
+      <li class="button radius log"><%= link_to "Sign In", login_path %></li>
+  <% end %>
+  <li>
+    <%= form_tag root_path, method: :get do %>
+      <%= label_tag :query, "Search" %>
+      <%= text_field_tag :query %>
+      <%= submit_tag "Search" %>
+    <% end %>
+  </li>
+</ul>

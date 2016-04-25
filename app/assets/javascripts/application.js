@@ -12,8 +12,39 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
+//= require jquery-ui/draggable
+//= require jquery-ui/droppable
 //= require foundation
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function(){
+  $(document).foundation();
+  $( ".draggable" ).draggable({ cursor: "move"});
+  $( ".member" ).droppable({
+    accept: ".draggable",
+    activate: function( event, ui ) {},
+    drop: function(ev, ui) {
+      var $el = $(ui.draggable);
+
+      $el
+        .detach()
+        .css({top: 0,left: 0})
+        .appendTo(this)
+      ;
+
+      $('<input type="hidden"/>')
+        .attr({
+          name: this.id,
+          value: $el.text()
+        })
+        .insertBefore(this)
+      ;
+    }
+  });
+  $(".party-wrapper").submit(function submitForm(e) {
+    e.preventDefault();
+    var data = $('.party-wrapper').serialize();
+    // console.log(data);
+    $.post('/parties', data);
+  })
+});

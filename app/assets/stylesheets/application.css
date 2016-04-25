@@ -13,5 +13,27 @@
  *= require_tree .
  *= require_self
  *= require foundation_and_overrides
- *= require jquery-ui
+ *= require jquery-ui/draggable
  */
+
+
+ ul {
+     list-style-type: none;
+}
+
+.log a {
+  color: black;
+}
+
+.draggable {
+  display: inline-block;
+}
+
+.partywrapper {
+  border: 1px solid black;
+}
+
+.member {
+  border: 1px solid black;
+  height: 50px;
+}

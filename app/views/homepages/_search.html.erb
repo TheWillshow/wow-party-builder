@@ -1,8 +1,8 @@
 <h3>Search</h3>
-<p>
+<div>
   <%= form_tag root_path, method: :get do %>
     <%= label_tag :query, "Search" %>
     <%= text_field_tag :query %>
     <%= submit_tag "Search" %>
   <% end %>
-</p>
+</div>

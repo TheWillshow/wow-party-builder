@@ -1,0 +1,15 @@
+<%= @guild.guild_name %>
+<ul>
+<% @guildmembers.each do |guildmember| %>
+  <li class="draggable"><%= guildmember.member_name %><li>
+  <% end %>
+</ul>
+
+<form class="party-wrapper">
+  <div class="member" id="member1" name="member1"></div>
+  <div class="member" id="member2" name="member2"></div>
+  <div class="member" id="member3" name="member3"></div>
+  <div class="member" id="member4" name="member4"></div>
+  <div class="member" id="member5" name="member5"></div>
+  <button type="submit" name="party-create">Submit</button>
+</form>

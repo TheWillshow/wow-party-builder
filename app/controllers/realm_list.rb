@@ -34,6 +34,7 @@ module Realms
     "Blackwing Lair",
     "Blade's Edge",
     "Bladefist",
+    "Bleeding Hollow",
     "Blood Furnace",
     "Bloodhoof",
     "Bloodscalp",

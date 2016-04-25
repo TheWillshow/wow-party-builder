@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20160423201128) do
     t.string   "spec",            default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "guild_id"
+    t.integer  "guild_id",                     null: false
   end
 
   create_table "guilds", force: :cascade do |t|
