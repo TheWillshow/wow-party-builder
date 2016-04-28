@@ -1,10 +1,9 @@
-<h1>WoW Party Builder</h1>
 <ul>
     <% @pg_search_models.each do |pg_search| %>
       <% if pg_search.searchable.respond_to?(:name) %>
-      <li><%= pg_search.searchable.name %></li>
+        <li><%= link_to "#{pg_search.searchable.name}", root_path(party_id: pg_search[:searchable_id]) %></li>
       <% else %>
-        <li><%= link_to "#{pg_search.searchable.guild_name}", root_path(guild_id: pg_search[:id]) %></li>
+        <li><%= link_to "#{pg_search.searchable.guild_name}", root_path(guild_id: pg_search[:searchable_id]) %></li>
       <% end %>
     <% end %>
 </ul>
@@ -12,5 +11,8 @@
 <div>
   <% if !@guildmembers.nil? %>
     <%= render 'guilds/show_guildmembers' %>
+  <% end %>
+  <% if !@partymembers.nil? %>
+    <%= render 'parties/show_party' %>
   <% end %>
 </div>

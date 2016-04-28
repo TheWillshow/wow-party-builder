@@ -19,7 +19,11 @@
 
 $(function(){
   $(document).foundation();
-  $( ".draggable" ).draggable({ cursor: "move"});
+  $( ".draggable" ).draggable({ cursor: "move",
+                                revert: "invalid"
+                              });
+
+
   $( ".member" ).droppable({
     accept: ".draggable",
     activate: function( event, ui ) {},
@@ -39,12 +43,14 @@ $(function(){
         })
         .insertBefore(this)
       ;
+      $(this).droppable("destroy")
     }
   });
+
   $(".party-wrapper").submit(function submitForm(e) {
     e.preventDefault();
     var data = $('.party-wrapper').serialize();
-    // console.log(data);
+
     $.post('/parties', data);
   })
 });

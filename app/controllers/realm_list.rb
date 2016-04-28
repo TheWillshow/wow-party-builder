@@ -165,6 +165,7 @@ module Realms
     "Rexxar",
     "Rivendare",
     "Runetotem",
+    "Sargaras",
     "Saurfang",
     "Scarlet Crusade",
     "Scilla",

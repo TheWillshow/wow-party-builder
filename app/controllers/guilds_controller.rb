@@ -1,6 +1,8 @@
 class GuildsController < ApplicationController
   def create
     @guild = Guild.new(guild_params)
+    @guild_name = @guild.guild_name
+
     if @guild_name.nil?
       flash[:alert] = "Guild not found"
     else
@@ -23,7 +25,11 @@ class GuildsController < ApplicationController
   def show
     @guild = Guild.find(params[:id])
     @guildmembers = @guild.guildmembers
+    @numguildmembers = @guildmembers
     @realm_list = Realms::US_REALM_LIST
+    @party = Party.new
+    uid = session[:user_id]
+    @user = User.find_by_uid(uid)
   end
 
   private
@@ -39,19 +45,17 @@ class GuildsController < ApplicationController
     @guild.guild_name = @guild_info['name']
     @guild_name = @guild_info['name']
 
-    if @guild_info['reason'] == "Guild not found."
+    if @guild_info['reason'] == "Guild not found." || @guild_info['reason'] == "When in doubt, blow it up. (page not found)"
       @guild_name = nil
       flash[:alert] = "Guild not found"
     elsif Guild.exists?(guild_name:'@guild_name')
       flash[:alert] = "Guild already in Database"
       @guild = Guild.find_by guild_name: "#{@guild_name}"
-    elsif @guild.id.nil?
-      binding.pry
-      flash[:alert] = "Guild not found"
     else
       @guild = Guild.new(guild_name:"#{@guild_name}", realm:"#{@realm}")
       @guild.save
       flash[:notice] = "Guild has been imported"
+      root_path(@guild[:guild_id])
     end
   end
 
@@ -82,6 +86,6 @@ class GuildsController < ApplicationController
   end
 
   def guild_params
-    params.require(:guild).permit(:guild_name.downcase, :realm.downcase)
+    params.require(:guild).permit(:guild_name, :realm)
   end
 end
