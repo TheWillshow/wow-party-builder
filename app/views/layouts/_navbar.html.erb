@@ -1,5 +1,29 @@
-<% if session[:user_id] %>
-    <li><%= link_to "Log out", '/logout', method: :delete %></li>
-<% else %>
-    <li><%= link_to "Sign In", login_path %></li>
-<% end %>
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu">
+      <div class="top-bar-title">
+        <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+          <button class="menu-icon dark" type="button" data-toggle></button>
+        </span>
+        <li class="menu-text">WoW Party Builder</li>
+      </div>
+      <li>
+        <form action="/" accept-charset="UTF-8" method="get" class="search-form-top">
+                <li>
+                  <input type="text" name="query" id="query" placeholder="Search">
+                </li>
+                <li><input type="submit" name="commit" value="Search" class="button search-form-btn"></li>
+        </form>
+      </li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="dropdown menu" data-dropdown-menu>
+        <% if session[:user_id] %>
+          <li><%= link_to "Log out", '/logout', method: :delete, class: "button" %></li>
+        <% else %>
+          <li><%= link_to "Sign In", login_path, class: "button" %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

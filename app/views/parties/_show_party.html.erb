@@ -1,0 +1,8 @@
+<h2 class="party-list-title"><%= @selected_party.name %></h2>
+<div class="row user-party-list">
+  <ul>
+  <% @partymembers.each do |partymember| %>
+    <li class="large-4 large-centered columns party-list"><%= partymember %><li>
+    <% end %>
+  </ul>
+</div>

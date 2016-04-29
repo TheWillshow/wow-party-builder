@@ -1,7 +1,6 @@
 class OauthSessionsController < ApplicationController
 
   def create
-    binding.pry
     auth = request.env["omniauth.auth"]
     session[:user_id] = auth["uid"]
     session[:user_info] = auth["info"]
@@ -10,7 +9,7 @@ class OauthSessionsController < ApplicationController
     @battletag = auth['info']['battletag']
     @user = User.new(uid: @uid, battletag: @battletag)
     session[:current_user] = auth['info']
-binding.pry
+
     if @user.save
       root_path
     elsif Guild.exists?
@@ -18,7 +17,7 @@ binding.pry
     else
       @user = User.find_by uid: "#{@uid}"
     end
-    binding.pry
+
     redirect_to root_path
   end
 

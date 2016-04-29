@@ -1,0 +1,8 @@
+<h2 class="party-list-title">My Created Parties</h2>
+<ul class="party-list">
+<% @parties.each do |party| %>
+    <div class="row user-party-list">
+      <li class="large-4 large-centered columns party-list"><%= link_to "#{party.name}", root_path(party_id: party.id) %></li>
+    </div>
+<% end %>
+</ul>
