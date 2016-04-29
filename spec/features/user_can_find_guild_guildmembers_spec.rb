@@ -2,12 +2,6 @@ require 'rails_helper'
 
 feature 'User can find guild and guildmembers' do
   before :each do
-    FactoryGirl.create(
-      :user,
-      username: 'toothless',
-      email: 'toothlessthedragon@email.com',
-      password: 'password'
-    )
     visit root_path
   end
 
@@ -18,9 +12,9 @@ feature 'User can find guild and guildmembers' do
 
   scenario 'logged in user can see guild import form' do
     click_on 'Sign In'
-    fill_in 'Email', with: 'toothlessthedragon@email.com'
-    fill_in 'Password', with: 'password'
-    click_on 'Log in'
+    fill_in 'input#accountName', with: 'wowpartybuilder@gmail.com'
+    fill_in 'password', with: 'toothless1'
+    click_on 'Log in to Battle.net'
 
     expect(page).to have_content('Guildname')
     expect(page).to have_content('Realm')

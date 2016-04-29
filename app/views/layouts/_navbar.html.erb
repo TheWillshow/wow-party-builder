@@ -20,8 +20,6 @@
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu>
         <% if session[:user_id] %>
-          <li><%= link_to "My Parties", user_path(@user), class: "button parties-button" %></li>
-          <li>   </li>
           <li><%= link_to "Log out", '/logout', method: :delete, class: "button" %></li>
         <% else %>
           <li><%= link_to "Sign In", login_path, class: "button" %></li>

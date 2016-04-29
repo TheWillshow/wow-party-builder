@@ -10,15 +10,13 @@
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
   </head>
-
   <body>
     <div class="layer">
       <header>
         <%= render "layouts/navbar" %>
         <%= render "layouts/flash" %>
       </header>
-
-      <% if session[:user_id] %>
+      <% if session[:user_id]%>
         <%= render "guilds/guild_form", locals: {us_server_list: @us_realm_list} %>
       <% end %>
       <%= yield %>
