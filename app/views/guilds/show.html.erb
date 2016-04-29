@@ -1,0 +1,9 @@
+<%= @guild.guild_name %>
+
+<ul>
+<% @guildmembers.each do |guildmember| %>
+  <li><%= guildmember.member_name %><li>
+  <% end %>
+</ul>
+
+<%= render "parties/party_form" %>

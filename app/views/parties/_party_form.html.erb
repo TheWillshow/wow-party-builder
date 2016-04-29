@@ -1,0 +1,10 @@
+<%= form_for @party, method: :post, class: 'party-wrapper' do |f| %>
+  <%= f.label :name, "Party Name" %>
+  <%= f.text_field :name %>
+  <div class="member" id="member1" name="member1"></div>
+  <div class="member" id="member2" name="member2"></div>
+  <div class="member" id="member3" name="member3"></div>
+  <div class="member" id="member4" name="member4"></div>
+  <div class="member" id="member5" name="member5"></div>
+  <%= f.button "Submit! ", class: "btn btn-lg btn-primary" %>
+<% end %>

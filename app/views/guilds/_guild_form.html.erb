@@ -1,15 +1,14 @@
-  <%= form_for @guild do |f| %>
-    <div class="field">
-      <%= f.label :name, 'Guildname' %><br />
-      <%= f.text_field :guild_name, autofocus: true %>
-    </div>
-
-    <div class="field">
-      <%= f.label :Realm, 'Realm' %><br />
-      <%= f.select :realm, @realm_list%>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Submit" %>
-    </div>
-  <% end %>
+<div class="row">
+  <div class="medium-6 medium-centered large-4 large-centered columns import-guild">
+    <%= form_for @guild do |f| %>
+      <div class="row column log-in-form">
+        <h4 class="text-center">Import your guild!</h4>
+        <%= f.label :name, 'Guildname' %>
+        <%= f.text_field :guild_name, autofocus: true %>
+        <%= f.label :realm, 'Realm' %>
+        <%= f.select :realm, @realm_list%>
+        <%= f.submit "Submit", class: "button expanded" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'homepages#index'
 
-  resources :users, :homepages, :guilds
+  resources :users, :homepages, :guilds, :parties
 
   resources :oauth, only: [:create, :new, :destroy]
 

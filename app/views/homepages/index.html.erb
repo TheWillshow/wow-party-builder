@@ -1,4 +1,18 @@
-<h1>Hi</h1>
-<% if session[:user_id] %>
-  <%= render "guilds/guild_form", locals: {us_server_list: @us_realm_list} %>
-<% end %>
+<ul>
+    <% @pg_search_models.each do |pg_search| %>
+      <% if pg_search.searchable.respond_to?(:name) %>
+        <li><%= link_to "#{pg_search.searchable.name}", root_path(party_id: pg_search[:searchable_id]) %></li>
+      <% else %>
+        <li><%= link_to "#{pg_search.searchable.guild_name}", root_path(guild_id: pg_search[:searchable_id]) %></li>
+      <% end %>
+    <% end %>
+</ul>
+
+<div>
+  <% if !@guildmembers.nil? %>
+    <%= render 'guilds/show_guildmembers' %>
+  <% end %>
+  <% if !@partymembers.nil? %>
+    <%= render 'parties/show_party' %>
+  <% end %>
+</div>

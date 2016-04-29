@@ -1,0 +1,22 @@
+<div class="row party-guild-wrapper">
+  <div class="">
+    <div class="guild-wrapper large-6 columns">
+      <h2 class="guild-name"><%= @selected_guild.guild_name %></h2>
+
+      <ul>
+        <div class="row">
+          <% @guildmembers.each_slice(25) do |gmgroup| %>
+            <div class="small-2 columns">
+            <% gmgroup.each do |guildmember| %>
+              <li class="draggable"><%= guildmember.member_name %><li>
+            <% end %>
+            </div>
+          <% end %>
+        </div>
+      </ul>
+    </div>
+    <div class="party-create-wrapper large-6 columns">
+      <%= render "parties/party_form" %>
+    </div>
+  </div>
+</div>
