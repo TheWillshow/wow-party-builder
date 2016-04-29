@@ -12,3 +12,5 @@ module ClassList
     10 => "Monk",
     11 => "Druid"
   }
+
+end

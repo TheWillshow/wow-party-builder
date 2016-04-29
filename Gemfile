@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.3.0'
 gem 'dotenv-rails', :groups => [:development, :test]
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -26,6 +26,8 @@ gem 'foundation-rails'
 gem 'omniauth-oauth2', "1.3.1"
 gem 'omniauth-bnet', "1.1.0"
 gem 'pg_search'
+gem 'puma'
+gem 'rails_12factor', group: :production
 
 
 group :test do
