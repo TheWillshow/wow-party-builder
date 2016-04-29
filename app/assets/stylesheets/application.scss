@@ -16,9 +16,10 @@
  *= require_self
  *= require_tree .
  */
- 
+
  body {
-   background-image: url("/images/illidan.jpg");
+
+   background-image: image-url('/images/illidan.jpg');
    background-repeat: no-repeat;
    background-position: center center;
    background-size: cover;
