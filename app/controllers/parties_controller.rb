@@ -1,4 +1,12 @@
 class PartiesController < ApplicationController
+  include Realms
+  def index
+    @guild = Guild.new
+    uid = session[:user_id]
+    @user = User.find_by_uid(uid)
+    @realm_list = Realms::US_REALM_LIST
+  end
+
   def create
     @party_members = []
     uid = session[:user_id]
@@ -20,7 +28,6 @@ class PartiesController < ApplicationController
       @party_members << params['member5']
     end
     @party = Party.new(name: params['party']['name'], user: @user)
-    binding.pry
     if !@party.save
       flash[:alert] = "Party not saved."
       redirect_to root_path
