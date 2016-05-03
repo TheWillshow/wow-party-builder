@@ -18,6 +18,8 @@
       </header>
       <% if session[:user_id]%>
         <%= render "guilds/guild_form", locals: {us_server_list: @us_realm_list} %>
+      <% else %>
+        <%= render "layouts/signed_out" %>
       <% end %>
       <%= yield %>
     </div>
