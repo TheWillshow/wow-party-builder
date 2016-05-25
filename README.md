@@ -10,3 +10,12 @@ If you do not have a battle net account, please feel free to use this account to
 Email: wowopartybuilder@gmail.com
 
 Pass: SVdW7d
+
+This app is built to create your very own world of warcraft parties by importing a guild! 
+
+To get started log in with a battle net account through the Blizzard Authentication. If you dont have one, I have provided one up top.
+
+Once in, import a guild using the guild import feature.
+
+After that just search for the guild and click the name and have fun creating your very own parties!
+
