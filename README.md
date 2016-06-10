@@ -5,6 +5,8 @@
 ![Coverage Status](https://coveralls.io/repos/TheWillshow/wow-party-builder/badge.png)
 
 
+https://wowpartybuilder.herokuapp.com/
+
 If you do not have a battle net account, please feel free to use this account to view the app:
 
 Email: wowopartybuilder@gmail.com
